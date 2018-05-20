@@ -76,7 +76,7 @@ public class Mao {
 		if(m.getCarta(1).getNaipe() == m.getCarta(2).getNaipe()) {
 			iguais = 1;
 			if(m.getCarta(1).getValor() < 10 && controleB == 0) {
-				pontosEnvido += m.getCarta(0).getValor();
+				pontosEnvido += m.getCarta(1).getValor();
 				controleB = 1;
 			}
 			if(m.getCarta(2).getValor() < 10 && controleC == 0) {
