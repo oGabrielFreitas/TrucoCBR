@@ -21,6 +21,7 @@ public class JogoMain {
 		
 		System.out.println("Sua mão é:");
 		fun.imprimeMao(mH);
+		System.out.println("Pontos Envido = " + mH.pontosEnvido(mH));
 		
 		
 		
