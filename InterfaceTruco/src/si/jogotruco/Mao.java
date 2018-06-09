@@ -9,7 +9,12 @@ public class Mao {
 	private Carta carta[] = new Carta[3];
 	private Acoes fun = new Acoes();
 	private int pontosEnvido;
+	private int emao; // É mão? (Para critério de desempate no envido)
+	private int pontosHumano = 0, pontosRobo = 0;
 	
+	
+	
+	//-----------------------------------------------------------------
 	//Função usada para testes...
 	public void setMao(Carta c1, Carta c2, Carta c3) {
 		
@@ -43,6 +48,7 @@ public class Mao {
 		
 	}
 	
+	// Calcula pontos do Envido
 	public int pontosEnvido(Mao m) {
 		
 		pontosEnvido = 0;
@@ -62,7 +68,7 @@ public class Mao {
 				controleB = 1;
 			}
 		}
-		if(m.getCarta(0).getNaipe() == m.getCarta(2).getNaipe()) {
+		else if(m.getCarta(0).getNaipe() == m.getCarta(2).getNaipe()) {
 			iguais = 1;
 			if(m.getCarta(0).getValor() < 10 && controleA == 0) {
 				pontosEnvido += m.getCarta(0).getValor();
@@ -73,7 +79,7 @@ public class Mao {
 				controleC = 1;
 			}
 		}
-		if(m.getCarta(1).getNaipe() == m.getCarta(2).getNaipe()) {
+		else if(m.getCarta(1).getNaipe() == m.getCarta(2).getNaipe()) {
 			iguais = 1;
 			if(m.getCarta(1).getValor() < 10 && controleB == 0) {
 				pontosEnvido += m.getCarta(1).getValor();
@@ -83,9 +89,22 @@ public class Mao {
 				pontosEnvido += m.getCarta(2).getValor();
 				controleC = 1;
 			}
-		}else {
+		}else { //Se não houver 2 cartas do mesmo naipe, retornará o valor da maior carta.
 			
-			//Retorna valor da maior carta
+			if(m.getCarta(0).getValor() == m.getCarta(1).getValor()) {
+				pontosEnvido = m.getCarta(0).getValor();
+			}else if(m.getCarta(0).getValor() > m.getCarta(1).getValor()) {
+				pontosEnvido = m.getCarta(0).getValor();
+			}else {
+				pontosEnvido = m.getCarta(1).getValor();
+			}
+			if(pontosEnvido == m.getCarta(2).getValor()) {
+				// pontosEnvido = pontosEnvido;
+			}else if(pontosEnvido > m.getCarta(2).getValor()) {
+				// pontosEnvido = pontosEnvido;
+			}else {
+				pontosEnvido = m.getCarta(2).getValor();
+			}	
 			
 		}
 		
@@ -96,6 +115,82 @@ public class Mao {
 		
 		
 		return pontosEnvido;
+	}
+	
+	public Carta getMaiorCarta(Mao m) {
+		
+		Carta c = new Carta();
+		
+		if(m.getCarta(0).getPesoValor() == m.getCarta(1).getPesoValor()) {
+			c = m.getCarta(0);
+		}else if(m.getCarta(0).getPesoValor() > m.getCarta(1).getPesoValor()) {
+			c = m.getCarta(0);
+		}else {
+			c = m.getCarta(1);
+		}
+		if(c.getPesoValor() == m.getCarta(2).getPesoValor()) {
+			c = c;
+		}else if(c.getPesoValor() > m.getCarta(2).getPesoValor()) {
+			c = c;
+		}else {
+			c = m.getCarta(2);
+		}		
+		
+		return c;
+	}
+	
+	public Carta getMediaCarta(Mao m) {
+		
+		Carta c = new Carta();
+		c = m.getMaiorCarta(m);
+		
+		if(m.getCarta(0).getId() == c.getId()) {
+			if(m.getCarta(1).getPesoValor() > m.getCarta(2).getPesoValor())
+				c = m.getCarta(1);
+			else {
+				c = m.getCarta(2);
+			}			
+		}
+		else if(m.getCarta(1).getId() == c.getId()) {
+			if(m.getCarta(0).getPesoValor() > m.getCarta(2).getPesoValor())
+				c = m.getCarta(0);
+			else {
+				c = m.getCarta(2);
+			}			
+		}
+		else if(m.getCarta(2).getId() == c.getId()) {
+			if(m.getCarta(0).getPesoValor() > m.getCarta(1).getPesoValor())
+				c = m.getCarta(0);
+			else {
+				c = m.getCarta(1);
+			}			
+		}	
+		
+		return c;
+	}
+	
+	public Carta getMenorCarta(Mao m) {
+		
+		Carta c = new Carta();
+		
+		if(m.getCarta(0).getPesoValor() == m.getCarta(1).getPesoValor()) {
+			c = m.getCarta(0);
+		}else if(m.getCarta(0).getPesoValor() < m.getCarta(1).getPesoValor()) {
+			c = m.getCarta(0);
+		}else {
+			c = m.getCarta(1);
+		}
+		if(c.getPesoValor() == m.getCarta(2).getPesoValor()) {
+			c = c;
+		}else if(c.getPesoValor() < m.getCarta(2).getPesoValor()) {
+			c = c;
+		}else {
+			c = m.getCarta(2);
+		}		
+		
+		return c;
+		
+		
 	}
 	
 	//getCarta específica 

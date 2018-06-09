@@ -6,9 +6,9 @@ public class Carta {
 		// TODO Auto-generated constructor stub
 	}
 	
-	private int id, valor, naipe, pesoTruco, pesoEnvido;
+	private int id, valor, naipe, pesoTruco, pesoEnvido, pesoValor;
 	
-	
+
 	public String naipeCarta(Carta c) {
 		
 		String s = new String();
@@ -70,6 +70,15 @@ public class Carta {
 	public void setPesoEnvido(int pesoEnvido) {
 		this.pesoEnvido = pesoEnvido;
 	}
+	
+	public int getPesoValor() {
+		return pesoValor;
+	}
+
+	public void setPesoValor(int pesoValor) {
+		this.pesoValor = pesoValor;
+	}
+
 	
 	
 }
